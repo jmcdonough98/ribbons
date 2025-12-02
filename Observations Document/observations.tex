@@ -1,0 +1,312 @@
+\documentclass[reqno]{amsart}
+\usepackage{amsmath,amsthm,amssymb,bm,setspace}
+\usepackage{hyperref, nameref}
+\usepackage{a4wide}
+\usepackage{cleveref}
+\usepackage{graphicx,color}
+\usepackage{tikz}
+\usepackage{youngtab}
+\usepackage{arydshln}
+\usepackage{etoolbox}
+\usepackage{biblatex}
+
+\addbibresource{refs.bib}
+
+\usetikzlibrary{positioning,decorations.pathmorphing, decorations.pathreplacing, decorations.shapes}
+\numberwithin{equation}{section}
+\renewcommand{\baselinestretch}{1.25}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{remark}[thm]{Remark}
+
+\theoremstyle{definition}
+\newtheorem{exam}{Example}
+\newtheorem{defn}{Definition}
+\newtheorem{conj}{Conjecture}
+\newtheorem{obs}{Observation}
+\newtheorem{question}{Question}
+\newtheorem{problem}{Problem}
+\newtheorem*{note}{Note}
+
+\newcommand{\defining}[2]{\hypertarget{#2}{\textit{#1}}}
+\newcommand{\defined}[2]{\hyperref{#2}{#1}}
+
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\sn{\mathfrak{S}_n}
+\newcommand\Par{\operatorname{Par}}
+\newcommand\lm{\lambda / \mu}
+\renewcommand\vec[1]{\mathbf{#1}}
+
+\newcommand\PF{\mathcal{P}}
+\newcommand\hPF{\overline{\mathcal{P}}}
+\newcommand\hPFz{\overline{\mathcal{P}(\ZZ)}}
+\newcommand\K{\mathcal{K}}
+\newcommand\R{\mathcal{R}}
+\newcommand\closure[1]{\overline{#1}}
+\newcommand{\seq}[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Observations on Ribbon-Positive Sequences}
+
+\author{Robert Angarone}
+\address{Department of Mathematics \\ University of Minnesota \\ Minneapolis \\ United States}
+\email{angar017@umn.edu}
+
+\begin{document}
+
+This document contains observations and questions about the possible relationship between
+\begin{itemize}
+\item Hilbert series of Koszul algebras,
+\item ribbon-positive homomorphisms, and
+\item the Hadamard closure of the set of P\'{o}lya Frequency series.
+\end{itemize}
+
+\subsection*{Notation}
+
+\begin{itemize}
+
+\item Let $\Lambda$ denote the ring of symmetric functions,
+with the usual notation as in EC2.
+
+\item If $f(t) = \sum_{k \geq 0} a_k t^k \in \RR[[t]]$ is a formal power series,
+let $\Phi_{f}: \Lambda \to \RR$ denote the ring homomorphism
+defined by the rule $h_i \mapsto a_i$.
+
+\item If $A \subseteq \RR[[t]]$, let $A(\ZZ) \subseteq \ZZ[[t]]$ denote the set of series in $A$ with integer coefficients.
+
+\item Let $\PF \subset \RR[[t]]$ denote the set of P\'{o}lya Frequency series.
+By the Jacobi-Trudi identity and the Aiseen-Edrei-Schoenberg-Whitney theorem,
+this is precisely the set of series $f(t)$ satisfying 
+satisfying $\Phi_{f}(1) = 1$ and $\Phi_{f}(s_{\lambda}) \geq 0$
+for all $\lambda \in \Par$.
+
+\item Let $\star$ denote the Hadamard product in $\RR[[t]]$, i.e. the product defined by 
+\[\left(\sum_{k \geq 0} a_k t^k\right) \star \left(\sum_{k \geq 0} b_k t^k\right) = \sum_{k \geq 0} a_kb_k t^k.\]
+
+\item If $A \subseteq \RR[[t]]$, let $\closure{A}$ denote the closure of $A$ under finite Hadamard products, that is
+\[ \closure{A} = \left\{ g_1(t) \star \cdots \star g_\ell(t) : g_1(t), \ldots, g_\ell(t) \in A \right\}. \]
+
+\end{itemize}
+
+\section*{Hilbert Series of Koszul Algebras}
+
+Let $\K$ denote the set of series $f(t)$ with integer coefficients
+so that there exists a Koszul algebra $A = \bigoplus_{k \geq 0} A_i$
+satisfying $\mathrm{Hilb}(A,t) = f(t)$.
+
+\begin{obs}(Sam-VandeBogert \cite[Theorem~1.1]{SV25})\label{obs:pf-implies-koszul}
+Every P\'{o}lya Frequency series with integer coefficients is the Hilbert series of a Koszul algebra.
+That is, we have $\PF(\ZZ) \subset \K$. Note that this containment is strict.
+\end{obs}
+
+Let $\R$ denote the set of real formal power series $f(t) = \sum_{k \geq 0} a_k t^k$
+satisfying $a_0 = 1$ and $\Phi_{f}(s_R) \geq 0$
+for all ribbon skew shapes $R$.
+We call all such series \defining{ribbon-positive}{def:ribbon-positive}.
+
+\begin{obs}\label{obs:kosuzl-implies-ribbon}
+Every Hilbert series of a Koszul algebra is ribbon-positive. That is, we have $\K \subseteq \R(\ZZ)$.
+\end{obs}
+
+\begin{proof}[Proof sketch]
+I believe this follows from Lemma~4.23 in \cite{VanRibbon} and Remark 4.24 in \cite{SV25}.
+\end{proof}
+
+\begin{question}
+Is it true that $\R(\ZZ) \subseteq \K$, and thus that $\K = \R(\ZZ)$?
+\end{question}
+
+\begin{proof}[Evidence]
+On the algebraic level, Lemma~4.23 in \cite{VanRibbon} is a biconditional statement.
+Thus it is plausible that \Cref{obs:kosuzl-implies-ribbon} is a biconditional statement at the numerical level,
+and thus that $\K = \R(\ZZ)$.
+\end{proof}
+
+\begin{proof}[How would you prove it?]
+Given a ribbon-positive series, we must find a Koszul algebra with that Hilbert series.
+Given a sequence $(a_0, a_1, \ldots)$ which `numerically' satisfies all the relations to be the Hilbert series of a Koszul algebra,
+can we impose a Koszul algebra structure on, say, $\bigoplus_{k \geq 0} \QQ^{a_k}$?
+\end{proof} 
+
+\section*{Hadamard Closures}
+
+Note that $\PF \subset \closure{\PF}$ is a strict containment.
+That is, the set of P\'{o}lya Frequency series is not closed under Hadamard products.
+However, the Segre product of graded algebras preserves the Koszul property.
+It follosw that $\closure{\K} = \K$. This leads to the following.
+
+\begin{obs}\label{obs:integer-hadamard-closure-in-koszul}
+We have $\closure{\PF(\ZZ)} \subseteq \K.$
+\end{obs}
+
+\begin{proof}
+We have $\PF(\ZZ) \subseteq \K$ and $\closure{\K} = \K$.
+Since $\K$ is a Hadamard-closed set containing $\PF(\ZZ)$,
+it must contain the Hadamard-closure $\closure{\PF(\ZZ)}$ of $\PF(\ZZ)$.
+\end{proof}
+
+Note that if $f(t) \in \closure{\PF(\ZZ)}$ has a prime coefficient in a nontrivial way,
+then in fact $f(t) \in \PF(\ZZ)$ (need to add details).
+Without having checked for examples, it does seem plausible that there are elements of $\K$ with prime coefficients.
+Thus it does \textit{not} seem plausible that $\closure{\PF(\ZZ)} = \K.$
+
+Nevertheless, it could still be true that $\closure{\PF}(\ZZ) = \K$.
+In other words, perhaps every Hilbert series of a Koszul algebra can be realized as a finite Hadamard product of P\'{o}lya Frequency series.
+The P\'{o}lya Frequency series factors are not required to have integer coefficients individually to lie in $\closure{\PF}(\ZZ)$.
+We only require that their Hadamard product has integer coefficients.
+
+Motivated by this possibility, we discuss the possible relationship between $\closure{\PF}$ and $\R$.
+
+\begin{obs}\label{obs:real-hadamard-closure-in-ribbon}
+We (probably) have $\closure{\PF} \subseteq \R$.
+\end{obs}
+
+\begin{proof}[Proof sketch]
+The proof techniques in \cite{AKOS} should readily generalize to show that 
+the property $\Phi_{f \star g}(s_R) \geq 0$ holds when $f,g \in \PF$.
+Thus the ribbon-positive property is preserved under Hadamard prodcuts of P\'{o}lya Frequency series,
+and it follows that $\closure{\PF} \subseteq \R.$
+\end{proof}
+
+\begin{question}
+Is the set $\R$ Hadamard-closed? That is, do we have $\closure{\R} = \R$?
+\end{question}
+
+\begin{proof}[Evidence]
+Given my suspicion that $\R(\ZZ) = \K$,
+and the fact that $\K$ is Hadamard-closed,
+I am inclined to believe this.
+
+Additionally, I think we may be able to generalize the techniques in \cite{AKOS} to show $\Phi_{f \star g}(s_R) \geq 0$ for any $f,g \in \R$,
+not just $f,g \in \PF$.
+However, it would require more work.
+\end{proof}
+
+% \begin{obs}\label{obs:naive-containment}
+% We have the following containment relations:
+% \begin{itemize}
+% \item $\PF(\ZZ) \subset \K$
+% \item $\hPFz \subset \K$
+% \item $\K \subseteq \R(\ZZ)$
+% \end{itemize}
+% \end{obs}
+
+% \begin{proof}[Sketch of Proof]
+% The first strict containment follows from the fact
+% that the set of P\'{o}lya Frequency series is not closed
+% under taking Hadamard products.
+
+% The second containment follows from the facts that
+% (i) every P\'{o}lya Frequency series
+% is the Hilbert series for some Koszul algebra and
+% (ii) the set $\K$ is Hadamard-closed.
+% In other words, $\K$ is a Hadamard-closed set containing $\PF(\ZZ)$,
+% so it must contain $\hPF(\ZZ)$.
+
+% The third containment follows from the work of VandeBogert.
+% \end{proof}
+
+\begin{obs}\label{obs:tl-positive-matrices}
+A series $f(t) = \sum_{k \geq 0} a_k t^k \in \R$ if and only if every Temperley--Lieb immanant of the matrix
+% \[
+% \begin{bmatrix}
+% a_1 & a_2 & a_3 & a_4 & \cdots & a_n \\
+% 1 & a_1 & a_2 & a_3 & \cdots & a_{n-1} \\
+% 0 & 1 & a_1 & a_2 & \cdots & a_{n-2} \\
+% 0 & 0 & 1 & a_1 & a_2 \\
+% 0 & 0 & 0 & 1 & a_1 & \\
+% 0 & 0 & 0 & 0 & 1 \\
+% \end{bmatrix}
+% \]
+\[\begin{bmatrix}
+a_1 & a_2 &     &        & a_n    \\
+1   & a_1 & a_2 &        &        \\
+0   &   1 & a_1 & a_2    &        \\
+0   &   0 &   1 & a_1    & a_2    \\
+0   &  0  &  0  &  1     & a_1    \\
+0   &  0  &  0  &   0    &  1     \\
+\end{bmatrix}\]
+is nonnegative for all $n \geq 1$.
+\end{obs}
+
+\begin{proof}[Sketch of proof]
+Use \cite[Corollary 3.16]{AKOS} to show that the Temperley--Lieb immanants
+of this matrix are precisely the images of ribbons under $\Phi_{f}$.
+\end{proof}
+
+\begin{question}
+Is it true that $\R \subseteq \closure{\PF}$, and thus that $\R = \closure{\PF}$?
+\end{question}
+
+\begin{proof}[How would you prove it?]
+Given a ribbon-positive sequence, find a way to express it as a Hadamard product of P\'{o}lya Frequency series.
+
+Here is one way that could potentially work:
+\begin{itemize}
+\item Use a result of Rhoades and Skandera
+to find a planar network $N$, possibly with some negative edge weights,
+which realizes the matrix from \Cref{obs:tl-positive-matrices}.
+\item Somehow use the hypothesis that all Temperley--Lieb immanants are positive
+to create a bijection between path families on $N$
+and path families on a tuple $N_1, \ldots, N_k$ of networks
+with \textit{positive} edge weights.
+\item Observe that taking tuples of path families
+corresponds to the Hadamard product of path matrices.
+\item Observe that the positive edge weight requirement implies that the path matrices for $N_1, \ldots, N_k$ come from P\'{o}lya Frequency series.
+\end{itemize}
+
+% Maybe we could also prove it by expressing the matrix from \Cref{obs:tl-positive-matrices}
+% directly as a Hadamard product of totally nonnegative matrices of the same form, then taking a limit at $n \to \infty$.
+
+% For example, when $n=2$, we have the matrix
+% \[\begin{bmatrix}
+% a & b \\
+% 1 & a
+% \end{bmatrix}.\]
+% In this situation, the requirement that all TL immanants be positive gives $\Phi(1,1)=a^2-b \geq 0$ and $\Phi(2)=b\geq 0$.
+% Thus this matrix is actually already totally positive.
+
+% When $n=3$, we have the matrix
+% \[\begin{bmatrix}
+% a & b & c \\
+% 1 & a & b \\
+% 0 & 1 & a
+% \end{bmatrix}.\]
+% The requirement that all TL immanants be positive gives
+% \begin{align*}
+% \Phi(1,1,1)&=a^3+c-2ab \geq 0 \\ \Phi(2,1)&=ba-c \geq 0 \\
+% \Phi(3)&=c \geq 0 \\ \Phi((2,2)/(1))&=ab-c \geq 0.
+% \end{align*}
+% The $3 \times 3$ matrix would be totally positive if we also had $b^2 - ac \geq 0$.
+% It turns out this is forced to be true, for example by observing that
+% \[(a^2-b)^2 = a^4 - 2a^2b+b^2 \geq 0,\]
+% which implies
+% \begin{align*}
+% b^2 &\geq 2a^2b-a^4 & (\text{from the above}) \\
+% &\geq 2ac - a^4 & (\text{from }) \Phi(2,1) \\
+% &\geq 2ac - b^2 & (\text{from }) \Phi(1,1) \\
+% \end{align*}
+\end{proof}
+
+\section*{Upshot}
+
+If it is indeed true that $\R(\ZZ) = \K$,
+then we have a totally  \textit{combinatorial} way of thinking about $\K$, for example using the concatenation/near-concatenation identity.
+If $\R(\ZZ) = \K$ \textit{and} it is also true that $\R = \closure{\PF}$,
+then we have $\closure{\PF}(\ZZ) = \K$.
+This gives a totally \textit{analytic} way of thinking about $\K$.
+Of course, by default, we have a way of thinking about $\K$ algebraically.
+Perhaps these three persectives in tandem would allow us
+to prove new results about $\K$.
+
+\printbibliography
+
+\end{document}
